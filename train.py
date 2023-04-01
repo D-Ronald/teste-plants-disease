@@ -1,4 +1,3 @@
-
 import tensorflow as tf
 from tensorflow.keras import models, layers
 import matplotlib.pyplot as plt
@@ -7,7 +6,7 @@ from tensorflow.keras.callbacks import TensorBoard
 BATCH_SIZE = 32
 IMAGE_SIZE = 256
 CHANNELS = 3
-EPOCHS = 50
+EPOCHS = 15
 
 dataset = tf.keras.preprocessing.image_dataset_from_directory(
     "unhealthy/",
@@ -55,7 +54,7 @@ test_ds = test_ds.skip(6)
 # len(test_ds)
 
 
-def get_dataset_partitions_tf(ds, train_split=0.8, val_split=0.1, test_split=0.1, shuffle=True, shuffle_size=10000):
+def get_dataset_partitions_tf(ds, train_split=0.7, val_split=0.2, test_split=0.1, shuffle=True, shuffle_size=10000):
     assert (train_split + test_split + val_split) == 1
 
     ds_size = len(ds)
@@ -134,9 +133,9 @@ if __name__ == "__main__":
         batch_size=BATCH_SIZE,
         validation_data=val_ds,
         verbose=1,
-        epochs=12,
+        epochs=15,
         callbacks=[tensorboard]
     )
 
     model.save("Leaves-2convo32-4convo64-2dense64-new.h5")
-
+ 
